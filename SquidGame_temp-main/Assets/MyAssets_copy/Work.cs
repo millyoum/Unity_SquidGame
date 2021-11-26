@@ -110,6 +110,21 @@ public class Work : MonoBehaviour
 
     }
 
+    void OnCollisionExit(Collision hit)
+    {
+
+        //플레이어가 바닥에 떨어졌을 시 처음 자리로 부활
+        if (hit.collider.CompareTag("deadFloor"))
+        {
+            hp -= 1;
+            if (hp <= 0)
+                GameManager.instance.GameOver();
+            Debug.Log("플레이어가 deadFloor 밟음 HP");
+            hpManager.SetHp(hp);
+        }
+
+    }
+
     //플레이어와 충돌 물체 처리, 물체를 밀 때 사용한다네요
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
@@ -124,7 +139,7 @@ public class Work : MonoBehaviour
         //플레이어가 바닥에 떨어졌을 시 처음 자리로 부활
         if (hit.collider.CompareTag("deadFloor"))
         {
-
+            Debug.Log("플레이어가 deadFloor 밟음 REPOSITION");
             transform.position = new Vector3(0, 0.5f, 0);
         }
         //게임 클리어시
@@ -135,20 +150,7 @@ public class Work : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision hit)
-    {
 
-        //플레이어가 바닥에 떨어졌을 시 처음 자리로 부활
-        if (hit.collider.CompareTag("deadFloor"))
-        {
-            hp -= 1;
-            if (hp <= 0)
-                GameManager.instance.GameOver();
-            Debug.Log("플레이어가 deadFloor 밟음");
-            hpManager.SetHp(hp);
-        }
-
-    }
 
 
 }

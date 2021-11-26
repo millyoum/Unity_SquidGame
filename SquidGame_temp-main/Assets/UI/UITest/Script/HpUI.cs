@@ -35,6 +35,7 @@ public class HpUI : MonoBehaviour
     public void SetHp(int val)
     {
         // + hp when you restart the game
+        Debug.Log("SetHP");
         hp = val;
 
         // - hp : when you die  ex SetHp(-1)
